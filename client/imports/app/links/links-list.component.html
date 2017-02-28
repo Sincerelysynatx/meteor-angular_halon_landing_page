@@ -14,7 +14,7 @@
 </div>
 <!--
 <div *ngFor="let group of groups | async" class="w3-row">
-    <div *ngFor="let link of group.links | async" class="w3-col s12 m6 l3 w3-animate-opacity">
+    <div *ngFor="let link of generateArray(group) | async" class="w3-col s12 m6 l3 w3-animate-opacity">
         <div class="w3-padding w3-margin w3-hover-shadow w3-card-2">
             <a href="{{link.url}}"  style="text-decoration:none">
                 <div>

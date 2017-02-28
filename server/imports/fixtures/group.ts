@@ -4,6 +4,8 @@ import { Group } from '../../../both/models/group.model';
 export function loadGroups(){
     if (Groups.find().cursor.count() === 0){
         const groups = [{
+            group_title: "Hardware Links",
+            group_id: "hardware",
             links: [{
                 url: 'http://google.com',
                 title: 'Hardware',
@@ -18,6 +20,8 @@ export function loadGroups(){
                 desc: 'A place to purple stuff'
             }]
         }, {
+            group_title: "Software Links",
+            group_id: "software",
             links: [{
                 url: 'http://google.com',
                 title: 'Software',
@@ -32,6 +36,8 @@ export function loadGroups(){
                 desc: 'A place to purple stuff'
             }]
         }, {
+            group_title: "NTL Links",
+            group_id: "ntl",
             links: [{
                 url: 'http://google.com',
                 title: 'NTL',

@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsModule } from 'angular2-meteor-accounts-ui'
+import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
 import { LINKS_DECLARATIONS } from './links';
 import { HEADER_DECLARATIONS } from './header';
 import { NAVBAR_DECLARATIONS } from './navbar';
-import {RouterModule} from "@angular/router";
 
 @NgModule({
     imports: [
