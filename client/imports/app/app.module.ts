@@ -6,9 +6,9 @@ import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
-import { LINKS_DECLARATIONS } from './links';
 import { HEADER_DECLARATIONS } from './header';
 import { NAVBAR_DECLARATIONS } from './navbar';
+import { GROUPS_DECLARATIONS } from './groups';
 
 @NgModule({
     imports: [
@@ -20,9 +20,9 @@ import { NAVBAR_DECLARATIONS } from './navbar';
     ],
     declarations: [
         AppComponent,
-        ...LINKS_DECLARATIONS,
         ...HEADER_DECLARATIONS,
-        ...NAVBAR_DECLARATIONS
+        ...NAVBAR_DECLARATIONS,
+        ...GROUPS_DECLARATIONS,
     ],
     bootstrap: [
         AppComponent

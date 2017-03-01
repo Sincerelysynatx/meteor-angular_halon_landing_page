@@ -16,7 +16,6 @@ export class NavBarComponent{
     groups: Observable<Group[]>;
 
     constructor() {
-        this.groups = Groups.find({}).zone(); // if you log this you will see data is returned back.
-        console.log("Groups Observable in navbar component", this.groups);
+        this.groups = Groups.find({}).zone();
     }
 }

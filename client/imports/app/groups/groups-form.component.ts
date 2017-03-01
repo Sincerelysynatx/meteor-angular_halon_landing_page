@@ -2,22 +2,30 @@ import { InjectUser } from 'angular2-meteor-accounts-ui';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Meteor } from 'meteor/meteor';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+//noinspection TypeScriptCheckImport
+import { Random } from 'meteor/random';
 
 import { Links } from '../../../../both/collections/links.collection';
+import { Groups } from '../../../../both/collections/group.collection';
 
 //noinspection TypeScriptCheckImport
-import template from './links-form.component.html';
+import template from './groups-form.component.html';
 
 @Component({
     selector: 'links-form',
     template
 })
+
 @InjectUser('user')
-export class LinksFormComponent implements OnInit {
+export class GroupsFormComponent implements OnInit {
     addForm: FormGroup;
+    groupName: string;
+    paramsSub: Subscription;
 
     constructor(
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder, private route: ActivatedRoute
     ){}
 
     ngOnInit(){
@@ -26,20 +34,25 @@ export class LinksFormComponent implements OnInit {
             title: ['', Validators.required],
             desc: ['', Validators.required]
         });
+        this.paramsSub = this.route.params
+            .map(params => params['groupName'])
+            .subscribe(groupName => {
+                this.groupName = groupName;
+            });
     }
 
     addLink(): void {
-        /*
         if (Meteor.user()['emails'][0]['address'] != "admin@admin.com")
         {
             alert("Please log in as admin to make changes");
             return;
         }
-        */
 
         if (this.addForm.valid) {
             //noinspection TypeScriptUnresolvedFunction
-            Links.insert(Object.assign({}, this.addForm.value, { owner: Meteor.userId() }));
+            var temp = Object.assign({}, this.addForm.value, {_id : Random.id()});
+            //noinspection TypeScriptUnresolvedFunction
+            Groups.update({"_id" : this.groupName}, {$push : {links : temp}});
             this.addForm.reset();
         }
     }

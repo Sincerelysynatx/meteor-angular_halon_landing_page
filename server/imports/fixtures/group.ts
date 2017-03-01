@@ -1,5 +1,7 @@
 import { Groups } from '../../../both/collections/group.collection';
 import { Group } from '../../../both/models/group.model';
+//noinspection TypeScriptCheckImport
+import { Random } from 'meteor/random';
 
 export function loadGroups(){
     if (Groups.find().cursor.count() === 0){
@@ -7,14 +9,17 @@ export function loadGroups(){
             group_title: "Hardware Links",
             group_id: "hardware",
             links: [{
+                _id: Random.id(),
                 url: 'http://google.com',
                 title: 'Hardware',
                 desc: 'A place to google stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://yahoo.com',
                 title: 'Yahoo',
                 desc: 'A place to yahoo stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://purple.com',
                 title: 'Purple',
                 desc: 'A place to purple stuff'
@@ -23,14 +28,17 @@ export function loadGroups(){
             group_title: "Software Links",
             group_id: "software",
             links: [{
+                _id: Random.id(),
                 url: 'http://google.com',
                 title: 'Software',
                 desc: 'A place to google stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://yahoo.com',
                 title: 'Yahoo',
                 desc: 'A place to yahoo stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://purple.com',
                 title: 'Purple',
                 desc: 'A place to purple stuff'
@@ -39,14 +47,17 @@ export function loadGroups(){
             group_title: "NTL Links",
             group_id: "ntl",
             links: [{
+                _id: Random.id(),
                 url: 'http://google.com',
                 title: 'NTL',
                 desc: 'A place to google stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://yahoo.com',
                 title: 'Yahoo',
                 desc: 'A place to yahoo stuff'
             }, {
+                _id: Random.id(),
                 url: 'http://purple.com',
                 title: 'Purple',
                 desc: 'A place to purple stuff'

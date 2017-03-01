@@ -1,9 +1,7 @@
 import { Route } from '@angular/router';
 
-import { LinksListComponent } from './links/links-list.component';
-
+import { GroupComponent } from './groups/group-list.component';
 
 export const routes: Route[] = [
-    { path: '', component: LinksListComponent },
-    { path: 'groups/:groupName', component: LinksListComponent}
+    { path: 'groups/:groupName', component: GroupComponent }
 ];
