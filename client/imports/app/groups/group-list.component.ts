@@ -1,5 +1,6 @@
 import { InjectUser } from 'angular2-meteor-accounts-ui';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,20 +24,26 @@ import template from './group-list.component.html';
 @InjectUser('user')
 export class GroupComponent implements OnInit, OnDestroy {
     groups: Observable<Group[]>;
+    addForm: FormGroup;
     groupName: string;
+    group_id: string;
     paramsSub: Subscription;
 
-    constructor(private route: ActivatedRoute) {
-        this.groups = Groups.find({"group_id" : "hardware"}).zone(); // if you log this you will see data is returned back.
+    constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
     }
 
     ngOnInit(){
+        this.addForm = this.formBuilder.group({
+            url: ['', Validators.required],
+            title: ['', Validators.required],
+            desc: ['', Validators.required]
+        });
+
         this.paramsSub = this.route.params
             .map(params => params['groupName'])
             .subscribe(groupName => {
                 this.groupName = groupName;
-
-                this.groups = Groups.find({"_id" : groupName}).zone();
+                this.groups = Groups.find(this.groupName).zone();
             });
     }
 
@@ -44,13 +51,28 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.paramsSub.unsubscribe();
     }
 
+    addLink(): void {
+        if (Meteor.user()['emails'][0]['address'] != "admin@admin.com")
+        {
+            alert("Please log in as admin to make changes");
+            return;
+        }
+
+        if (this.addForm.valid) {
+            //noinspection TypeScriptUnresolvedFunction
+            var temp = Object.assign({}, this.addForm.value, {_id : Random.id()});
+            //noinspection TypeScriptUnresolvedFunction
+            Groups.update(this.groupName, {$push : {links : temp}});
+            this.addForm.reset();
+        }
+    }
+
     removeLink(link: Link): void {
         if (Meteor.user()['emails'][0]['address'] != "admin@admin.com")
         {
             alert("Please log in as admin to make changes");
-            return
+            return;
         }
-        //Groups.update({"_id": this.groupName}, {"$pull" : {"links" : {"_id": link._id}}});
         Groups.update(this.groupName, {
             $pull : {
                 links : {
@@ -58,6 +80,5 @@ export class GroupComponent implements OnInit, OnDestroy {
                 }
             }
         });
-        //Groups.update({"_id": this.groupName}, {"$set" : {"links" : []}});
     }
 }
