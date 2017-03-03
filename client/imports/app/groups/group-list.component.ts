@@ -26,7 +26,7 @@ export class GroupComponent implements OnInit, OnDestroy {
     groups: Observable<Group[]>;
     addForm: FormGroup;
     groupName: string;
-    group_id: string;
+    groupId: string;
     paramsSub: Subscription;
 
     constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
@@ -42,8 +42,15 @@ export class GroupComponent implements OnInit, OnDestroy {
         this.paramsSub = this.route.params
             .map(params => params['groupName'])
             .subscribe(groupName => {
-                this.groupName = groupName;
-                this.groups = Groups.find(this.groupName).zone();
+                this.groupId = groupName;
+                /*
+                if (temp)
+                {
+                    var id = temp.group_id;
+                    console.log(id);
+                }
+                */
+                this.groups = Groups.find(this.groupId).zone();
             });
     }
 
@@ -60,9 +67,7 @@ export class GroupComponent implements OnInit, OnDestroy {
 
         if (this.addForm.valid) {
             //noinspection TypeScriptUnresolvedFunction
-            var temp = Object.assign({}, this.addForm.value, {_id : Random.id()});
-            //noinspection TypeScriptUnresolvedFunction
-            Groups.update(this.groupName, {$push : {links : temp}});
+            Groups.update(this.groupId, {$push : {links : Object.assign({}, this.addForm.value, {_id : Random.id()})}});
             this.addForm.reset();
         }
     }
@@ -73,7 +78,7 @@ export class GroupComponent implements OnInit, OnDestroy {
             alert("Please log in as admin to make changes");
             return;
         }
-        Groups.update(this.groupName, {
+        Groups.update(this.groupId, {
             $pull : {
                 links : {
                     _id: link._id
