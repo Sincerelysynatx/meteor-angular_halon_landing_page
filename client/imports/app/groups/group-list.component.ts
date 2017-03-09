@@ -1,5 +1,5 @@
 import { InjectUser } from 'angular2-meteor-accounts-ui';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, SimpleChanges} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
@@ -22,10 +22,9 @@ import template from './group-list.component.html';
 })
 
 @InjectUser('user')
-export class GroupComponent implements OnInit, OnDestroy {
+export class GroupComponent implements OnInit, OnDestroy, OnChanges{
     groups: Observable<Group[]>;
     addForm: FormGroup;
-    groupName: string;
     groupId: string;
     paramsSub: Subscription;
 
@@ -43,15 +42,23 @@ export class GroupComponent implements OnInit, OnDestroy {
             .map(params => params['groupName'])
             .subscribe(groupName => {
                 this.groupId = groupName;
-                /*
-                if (temp)
-                {
-                    var id = temp.group_id;
-                    console.log(id);
-                }
-                */
+                //let document = Groups.findOne({group_id: groupName}, {fields: {_id: 1}});
+                //if(document)
+                    //this.groupId = document._id;
+                //console.log(Groups.collection);
+                //let document = Groups.find();
+                //console.log(document);
+                //console.log(Groups.findOne({group_id: groupName}, {fields: {_id: 1}}));
+                //let document = Groups.findOne({group_id: groupName});
+                //console.log(document);
+                //if (document)
+                    //this.groupId = document._id;
                 this.groups = Groups.find(this.groupId).zone();
             });
+    }
+
+    ngOnChanges(changes: SimpleChanges){
+        console.log("hello");
     }
 
     ngOnDestroy(){

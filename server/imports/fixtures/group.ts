@@ -7,7 +7,7 @@ export function loadGroups(){
     if (Groups.find().cursor.count() === 0){
         const groups = [{
             group_title: "Hardware Links",
-            group_id: "hardware",
+            _id: "hardware",
             links: [{
                 _id: Random.id(),
                 url: 'http://google.com',
@@ -26,7 +26,7 @@ export function loadGroups(){
             }]
         }, {
             group_title: "Software Links",
-            group_id: "software",
+            _id: "software",
             links: [{
                 _id: Random.id(),
                 url: 'http://google.com',
@@ -45,7 +45,7 @@ export function loadGroups(){
             }]
         }, {
             group_title: "NTL Links",
-            group_id: "ntl",
+            _id: "ntl",
             links: [{
                 _id: Random.id(),
                 url: 'http://google.com',
