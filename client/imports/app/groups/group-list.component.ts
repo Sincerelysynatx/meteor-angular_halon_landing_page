@@ -42,17 +42,6 @@ export class GroupComponent implements OnInit, OnDestroy, OnChanges{
             .map(params => params['groupName'])
             .subscribe(groupName => {
                 this.groupId = groupName;
-                //let document = Groups.findOne({group_id: groupName}, {fields: {_id: 1}});
-                //if(document)
-                    //this.groupId = document._id;
-                //console.log(Groups.collection);
-                //let document = Groups.find();
-                //console.log(document);
-                //console.log(Groups.findOne({group_id: groupName}, {fields: {_id: 1}}));
-                //let document = Groups.findOne({group_id: groupName});
-                //console.log(document);
-                //if (document)
-                    //this.groupId = document._id;
                 this.groups = Groups.find(this.groupId).zone();
             });
     }
