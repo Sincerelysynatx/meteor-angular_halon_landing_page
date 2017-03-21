@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsModule } from 'angular2-meteor-accounts-ui';
 import { RouterModule } from "@angular/router";
+//noinspection TypeScriptCheckImport
+import { MasonryModule } from 'angular2-masonry';
 
 import { AppComponent } from './app.component';
 import { routes } from './app.routes';
@@ -16,7 +18,8 @@ import { GROUPS_DECLARATIONS } from './groups';
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(routes),
-        AccountsModule
+        AccountsModule,
+        MasonryModule
     ],
     declarations: [
         AppComponent,
