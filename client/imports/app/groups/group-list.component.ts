@@ -25,6 +25,7 @@ import template from './group-list.component.html';
 export class GroupComponent implements OnInit, OnDestroy{
     groups: Observable<Group[]>;
     addForm: FormGroup;
+    updateForm: FormGroup;
     groupId: string;
     paramsSub: Subscription;
     public myOptions: MasonryOptions = {
@@ -38,14 +39,22 @@ export class GroupComponent implements OnInit, OnDestroy{
         this.addForm = this.formBuilder.group({
             url: ['', Validators.required],
             title: ['', Validators.required],
-            desc: ['', Validators.required]
+            desc: ['', Validators.required],
+            order: ['', Validators.required]
+        });
+
+        this.updateForm = this.formBuilder.group({
+            url: ['', Validators.required],
+            title: ['', Validators.required],
+            desc: ['', Validators.required],
+            order: ['', Validators.required]
         });
 
         this.paramsSub = this.route.params
             .map(params => params['groupName'])
             .subscribe(groupName => {
                 this.groupId = groupName;
-                this.groups = Groups.find(this.groupId).zone();
+                this.groups = Groups.find(this.groupId, {sort: {links: {order: 1}}}).zone();
             });
     }
 
@@ -80,5 +89,44 @@ export class GroupComponent implements OnInit, OnDestroy{
                 }
             }
         });
+    }
+
+    updateLink(link: Link): void {
+        console.log(link._id);
+        console.log(this.updateForm.value);
+        var newUrl = (this.updateForm.value.url == "")? link.url: this.updateForm.value.url;
+        var newTitle = (this.updateForm.value.title == "")? link.title: this.updateForm.value.title;
+        var newDesc = (this.updateForm.value.desc == "")? link.desc: this.updateForm.value.desc;
+        var newOrder = (this.updateForm.value.order == "")? link.order: this.updateForm.value.order;
+        console.log(newUrl, newTitle, newDesc, newOrder);
+        //noinspection TypeScriptUnresolvedFunction
+        Groups.update(this.groupId, {
+            $push : {
+                links : {
+                    url: newUrl,
+                    title: newTitle,
+                    desc: newDesc,
+                    order: newOrder,
+                    _id : Random.id()
+                }
+            }
+        });
+        Groups.update(this.groupId, {
+            $pull : {
+                links : {
+                    _id: link._id
+                }
+            }
+        });
+        this.updateForm.reset();
+        // Groups.update({_id: this.groupId, "links._id": link._id}, {
+        //     $set : {
+        //         'links.$.url': newUrl,
+        //         'links.$.title': newTitle,
+        //         'links.$.desc': newDesc,
+        //         'links.$.order': newOrder
+        //     }
+        // });
+        //Groups.update({_id: this.groupId, "links._id": link._id}, { $set : { "links.$.url": link.url, "links.$.title": link.title, "links.$.desc": link.desc, "links.$.order": link.order }});
     }
 }
