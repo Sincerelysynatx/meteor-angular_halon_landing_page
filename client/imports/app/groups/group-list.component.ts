@@ -63,12 +63,11 @@ export class GroupComponent implements OnInit, OnDestroy{
     }
 
     addLink(): void {
-        if (Meteor.user()['emails'][0]['address'] != "admin@admin.com")
+        if (Meteor.user()['emails'][0]['address'] != "halon_ifra")
         {
             alert("Please log in as admin to make changes");
             return;
         }
-
         if (this.addForm.valid) {
             //noinspection TypeScriptUnresolvedFunction
             Groups.update(this.groupId, {$push : {links : Object.assign({}, this.addForm.value, {_id : Random.id()})}});
@@ -77,7 +76,7 @@ export class GroupComponent implements OnInit, OnDestroy{
     }
 
     removeLink(link: Link): void {
-        if (Meteor.user()['emails'][0]['address'] != "admin@admin.com")
+        if (Meteor.user()['emails'][0]['address'] != "halon_ifra")
         {
             alert("Please log in as admin to make changes");
             return;
@@ -92,13 +91,15 @@ export class GroupComponent implements OnInit, OnDestroy{
     }
 
     updateLink(link: Link): void {
-        console.log(link._id);
-        console.log(this.updateForm.value);
+        if (Meteor.user()['emails'][0]['address'] != "halon_ifra")
+        {
+            alert("Please log in as admin to make changes");
+            return;
+        }
         var newUrl = (this.updateForm.value.url == "")? link.url: this.updateForm.value.url;
         var newTitle = (this.updateForm.value.title == "")? link.title: this.updateForm.value.title;
         var newDesc = (this.updateForm.value.desc == "")? link.desc: this.updateForm.value.desc;
         var newOrder = (this.updateForm.value.order == "")? link.order: this.updateForm.value.order;
-        console.log(newUrl, newTitle, newDesc, newOrder);
         //noinspection TypeScriptUnresolvedFunction
         Groups.update(this.groupId, {
             $push : {
