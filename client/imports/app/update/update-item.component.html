@@ -1,0 +1,23 @@
+
+<div class="w3-content">
+    <div class="w3-center w3-large">
+        <p>
+            Leaving a field blank will inherit whatever the previous value was. Update can be used for a back button as well.
+        </p>
+    </div>
+    <form [formGroup]="updateForm" (ngSubmit)="updateLink(link)" class="w3-container w3-theme w3-padding-large w3-card-4 w3-margin">
+        <p>
+            <input formControlName="title" class="w3-input" type="text" placeholder="{{link.title}}">
+        </p>
+        <p>
+            <input formControlName="desc" class="w3-input" type="text" placeholder="{{link.desc}}">
+        </p>
+        <p>
+            <input formControlName="url" class="w3-input" type="text" placeholder="{{link.url}}">
+        </p>
+        <p>
+            <input formControlName="order" class="w3-input" type="text" placeholder="{{link.order}}">
+        </p>
+        <button class="w3-btn w3-hover w3-theme-light" type="submit">Update</button>
+    </form>
+</div>

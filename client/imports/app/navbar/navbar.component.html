@@ -1,3 +1,29 @@
-<nav class="w3-topnav w3-theme-d2 w3-xlarge">
-    <a *ngFor="let group of groups | async" [routerLink]="['/groups', group._id]" class="w3-half w3-center">{{group.group_title}}</a>
+<nav class="w3-bar w3-theme-d2 w3-xlarge">
+    <div *ngFor="let group of groups | async">
+        <div style="position: relative">
+            <a [routerLink]="['/groups', group._id]" class="w3-bar-item w3-btn w3-hover-light-blue w3-col s3">
+                {{group.group_title}}
+            </a>
+            <div *ngIf="user" class="w3-btn w3-bar-item w3-transparent" style="z-index: 1; " (click)="removeGroup(group)">
+                <i class="fa fa-minus"></i>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="user" class="w3-center">
+        <div class="w3-btn w3-transparent" (click)="showAddGroup()">
+            <i class="fa fa-plus"></i>
+        </div>
+    </div>
 </nav>
+
+
+<div id="addGroup" class=" w3-hide w3-center" style="width: 400px; position: absolute; z-index: 1; right: 0px">
+    <form [formGroup]="addGroupForm" (ngSubmit)="addGroup()" class="w3-container w3-card-4 w3-white w3-padding-16 w3-large">
+        <label>Group Name</label>
+        <input formControlName="group_title" class="w3-input" type="text" placeholder="Software Links">
+        <label>Path Name</label>
+        <p class="w3-medium">This is the path that is used to refrence in the url, please only make this one word!!!</p>
+        <input formControlName="group_id" class="w3-input" type="text" placeholder="software">
+        <button class="w3-btn w3-theme w3-margin-top" type="submit">Add</button>
+    </form>
+</div>

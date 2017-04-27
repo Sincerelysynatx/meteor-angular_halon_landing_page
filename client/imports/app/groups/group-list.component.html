@@ -9,44 +9,33 @@
                         <p>{{link.desc}}</p>
                     </div>
                 </a>
-                <form *ngIf="user" [formGroup]="updateForm" (ngSubmit)="updateLink(link)" class="w3-container w3-theme w3-padding-large w3-card-4 w3-margin">
-                    <p>
-                        <input formControlName="title" class="w3-input" type="text" placeholder="{{link.title}}">
-                    </p>
-                    <p>
-                        <input formControlName="desc" class="w3-input" type="text" placeholder="{{link.desc}}">
-                    </p>
-                    <p>
-                        <input formControlName="url" class="w3-input" type="text" placeholder="{{link.url}}">
-                    </p>
-                    <p>
-                        <input formControlName="order" class="w3-input" type="text" placeholder="{{link.order}}">
-                    </p>
-                    <button class="w3-btn w3-theme-light" type="submit">Update</button>
-                </form>
-                <button class="w3-btn w3-theme" *ngIf="user" (click)="removeLink(link)">Remove</button>
+                <p *ngIf="user" >order: {{link.order}}</p>
+                <button class="w3-btn w3-hover w3-theme" *ngIf="user" (click)="removeLink(link)">Remove</button>
+                <button class="w3-btn w3-hover w3-theme" *ngIf="user" [routerLink]="['/update/'+ group._id + '/' + link._id]">Update</button>
             </div>
         </masonry-brick>
     </masonry>
 </div>
 
-
-<form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addLink()" class="w3-container w3-theme w3-padding-large w3-card-4 w3-margin">
-    <p>
-        <label class="w3-large">Title</label>
-        <input formControlName="title" class="w3-input" type="text" placeholder="Google">
-    </p>
-    <p>
-        <label class="w3-large">Description</label>
-        <input formControlName="desc" class="w3-input" type="text" placeholder="A place to Google things">
-    </p>
-    <p>
-        <label class="w3-large">Link/URL</label>
-        <input formControlName="url" class="w3-input" type="text" placeholder="http://google.com">
-    </p>
-    <p>
-        <label class="w3-large">Order</label>
-        <input formControlName="order" class="w3-input" type="text" placeholder="0">
-    </p>
-    <button class="w3-btn w3-theme-light" type="submit">Add</button>
-</form>
+<div class="w3-content">
+    <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addLink()" class="w3-theme w3-padding-large w3-card-4 w3-margin">
+        <h3 class="w3-white w3-center">Add a Link</h3>
+        <p>
+            <label class="w3-large">Title</label>
+            <input formControlName="title" class="w3-input" type="text" placeholder="Google">
+        </p>
+        <p>
+            <label class="w3-large">Description</label>
+            <input formControlName="desc" class="w3-input" type="text" placeholder="A place to Google things">
+        </p>
+        <p>
+            <label class="w3-large">Link/URL</label>
+            <input formControlName="url" class="w3-input" type="text" placeholder="http://google.com">
+        </p>
+        <p>
+            <label class="w3-large">Order</label>
+            <input formControlName="order" class="w3-input" type="text" placeholder="0">
+        </p>
+        <button class="w3-btn w3-hover w3-theme-light" type="submit">Add</button>
+    </form>
+</div>

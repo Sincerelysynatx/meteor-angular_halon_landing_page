@@ -7,7 +7,7 @@ Meteor.startup(() => {
     {
         Accounts.createUser({
             username: "halon_infra",
-            password: "sudormetc"
+            password: "sudormetc",
         });
     }
     loadGroups();

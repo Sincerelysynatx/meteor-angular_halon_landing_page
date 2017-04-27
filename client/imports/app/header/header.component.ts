@@ -27,10 +27,9 @@ export class HeaderComponent implements OnInit{
         });
     }
 
-    showLogin(){
+    showLogin(): void{
         (this.isShowing)? document.getElementById("signin").className += ' w3-hide' : document.getElementById("signin").className -= " w3-hide";
         this.isShowing = !this.isShowing;
-        console.log(this.isShowing);
     }
 
     login():void {

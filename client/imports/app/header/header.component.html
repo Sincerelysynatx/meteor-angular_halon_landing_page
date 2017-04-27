@@ -5,20 +5,22 @@
     Logout
 </div>
 
-<div class="w3-container w3-theme w3-center w3-display-container" style="padding: 96px 0 96px">
-    <div class="w3-theme-light w3-display-middle w3-card-4 w3-padding-medium w3-animate-opacity">
-        <h1 class="w3-xxlarge">Halon Landing Page</h1>
-        <h4><i>A source for all your Halon links</i></h4>
+<div style="position: relative">
+    <div id="signin" class="w3-hide" style="width: 200px; position: absolute; left: 8px; top: 8px; z-index: 1">
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="w3-container w3-card-4 w3-white w3-padding-8">
+            <label>admin username</label>
+            <input formControlName="username" class="w3-input" type="text">
+            <label>admin password</label>
+            <input formControlName="password" class="w3-input" type="password">
+            <button class="w3-btn w3-theme w3-margin-top" type="submit">Login</button>
+            <p id="error"></p>
+        </form>
     </div>
 </div>
 
-<div id="signin" class="w3-hide" style="width: 200px; position: fixed; left: 8px; top: 32px">
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="w3-container w3-card-4 w3-white w3-padding-8">
-        <label>First Name</label>
-        <input formControlName="username" class="w3-input" type="text">
-        <label>Last Name</label>
-        <input formControlName="password" class="w3-input" type="password">
-        <button class="w3-btn w3-theme w3-margin-top" type="submit">Login</button>
-        <p id="error"></p>
-    </form>
+<div class="w3-container w3-theme w3-center w3-display-container" style="padding: 96px 0 96px">
+    <div class="w3-theme-light w3-display-middle w3-card-4 w3-padding-small w3-animate-opacity">
+        <h1 class="w3-xxlarge">Halon Landing Page</h1>
+        <h4><i>A source for all your Halon links</i></h4>
+    </div>
 </div>

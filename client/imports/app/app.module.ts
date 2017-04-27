@@ -11,6 +11,7 @@ import { routes } from './app.routes';
 import { HEADER_DECLARATIONS } from './header';
 import { NAVBAR_DECLARATIONS } from './navbar';
 import { GROUPS_DECLARATIONS } from './groups';
+import { UPDATE_DECLARATIONS } from './update';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { GROUPS_DECLARATIONS } from './groups';
         ...HEADER_DECLARATIONS,
         ...NAVBAR_DECLARATIONS,
         ...GROUPS_DECLARATIONS,
+        ...UPDATE_DECLARATIONS
     ],
     bootstrap: [
         AppComponent
