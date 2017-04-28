@@ -16,10 +16,15 @@
         </masonry-brick>
     </masonry>
 </div>
-
+<br><br><br>
 <div class="w3-content">
     <form *ngIf="user" [formGroup]="addForm" (ngSubmit)="addLink()" class="w3-theme w3-padding-large w3-card-4 w3-margin">
-        <h3 class="w3-white w3-center">Add a Link</h3>
+        <div class="w3-display-container">
+            <div class="w3-theme-light w3-display-middle w3-center w3-card-4 w3-padding-small w3-animate-opacity" style="top: -32px; z-index: 1">
+                <h3 class="w3-xxlarge">Add a card</h3>
+                <h5><i>Add links to the current group</i></h5>
+            </div>
+        </div>
         <p>
             <label class="w3-large">Title</label>
             <input formControlName="title" class="w3-input" type="text" placeholder="Google">
